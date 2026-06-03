@@ -1,0 +1,19 @@
+// Примеры подключения
+
+// @font-face {
+//   font-family: "TTNormsPro";
+//   src: url("../fonts/TTNormsPro-Medium.woff2") format("woff2"),
+//   url("../fonts/TTNormsPro-Medium.woff") format("woff");
+//   font-weight: 500;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+@font-face {
+  font-family: "Actor";
+  src: url("../../fonts/actor-regular-normal-400.woff2") format("woff2"),
+  url("../../fonts/actor-regular-normal-400.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

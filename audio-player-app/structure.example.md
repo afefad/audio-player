@@ -27,11 +27,30 @@ my-audio-player/
 │  │  ├─ main.tsx
 │  │  ├─ router.tsx
 │  │  └─ styles/
-│  │     ├─ reset.scss
-│  │     ├─ variables.scss
+│  │     ├─ container.scss
+│  │     ├─ fonts.scss
 │  │     ├─ mixins.scss
-│  │     ├─ globals.scss
-│  │     └─ breakpoints.scss
+│  │     ├─ normalize.scss
+│  │     ├─ reboot.scss
+│  │     ├─ variables.scss
+│  │     └─ visually-hidden.scss 
+│  │
+│  ├─ assets/
+│  │  ├─ icons/
+│  │  ├─ images/
+│  │  └─ icons/
+│  │     ├─ sprite.svg
+│  │     └─ sprites/
+│  │        ├─ calendar.svg
+│  │        ├─ clock.svg
+│  │        ├─ dots.svg
+│  │        ├─ chevron-right.svg
+│  │        ├─ logo.svg
+│  │        ├─ music-notes.svg
+│  │        ├─ play-mobile.svg
+│  │        ├─ play.svg
+│  │        ├─ search.svg
+│  │        └─ volume.svg
 │  │
 │  ├─ pages/
 │  │  ├─ TracksPage.tsx
@@ -75,6 +94,10 @@ my-audio-player/
 │  │  └─ player-controls/
 │  │     └─ model.ts
 │  │
+│  ├─ fonts/
+│  │  ├─ actor-regular-normal-400.woff
+│  │  └─ actor-regular-normal-400.woff2
+│  │
 │  ├─ entities/
 │  │  ├─ track/
 │  │  │  ├─ types.ts
@@ -110,6 +133,30 @@ my-audio-player/
 ├─ vite.config.ts
 └─ README.md
 ```
+
+## Коротко по SASS
+
+### `container.scss`
+Стили контейнера для приложения
+
+### `fonts.scss`
+Шрифты подключеные через @font-face
+
+### `mixins.scss`
+Миксины SASS
+
+### `normalize.scss`
+Файл нормальизации стилей для совместимости с разными браузерами
+
+### `reboot.scss`
+Файл базовых стилей приложения
+
+### `variables.scss`
+Переменные для SASS
+
+### `visually-hidden.scss`
+Файл содержащий технический стиль visually-hidden
+
 
 ## Коротко по папкам
 
