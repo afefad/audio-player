@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 src.example
+structure.example.md
 
 # Editor directories and files
 .vscode/*
