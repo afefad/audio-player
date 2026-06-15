@@ -1,0 +1,32 @@
+// Colors
+$color-white: #ffffff;
+$color-black: #000000;
+
+$color-light-gray: #e8e8e8;
+$color-gray: #f5f5f5;
+$color-dark-gray: #c4c4c4;
+
+$color-grey: #aaaaaa;
+$color-dark-grey: #a4a4a4;
+
+$color-orange-light: #ff9d7c;
+$color-orange: #fc6d3e;
+$color-header: #11253d;
+$color-text: #171717;
+$color-error: #990000;
+
+// Typography
+$ff-actor: "Actor", "Arial", sans-serif;
+
+// Viewport
+$vp-tablet: 1023px;
+$vp-mobile: 767px;
+
+// Transition
+$transition-200: ease-in 0.1s;
+
+// table-css
+$border-bottom-gray: 1px solid $color-light-gray;
+$grid-template-table: minmax(25px, 40px) minmax(220px, 1fr) minmax(160px, 262px)
+  minmax(133px, 239px) 99px;
+$main-height: calc(100vh - 169px);

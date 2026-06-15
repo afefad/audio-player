@@ -1,0 +1,32 @@
+.track-table {
+
+  height: 100%;
+
+  &__header {
+    display: grid;
+    width: 100%;
+    height: 32px;
+    gap: 0;
+    grid-template-columns: $grid-template-table;
+    align-items: center;
+
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: 9%;
+    text-transform: uppercase;
+    color: $color-dark-grey;
+
+    border-bottom: $border-bottom-gray;
+  }
+
+  &:last-child {
+    border: none;
+  }
+
+  &__body {
+    overflow: auto;
+    height: calc(100vh - 300px);
+    margin: 0;
+    padding: 0;
+  }
+}

@@ -1,0 +1,12 @@
+.like {
+  height: 24px;
+  width: 24px;
+  transition: color $transition-200;
+  color: $color-grey;
+
+  &--enable {
+    color: $color-orange;
+  }
+
+  
+}

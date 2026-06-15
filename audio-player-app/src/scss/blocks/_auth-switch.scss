@@ -1,0 +1,20 @@
+.auth-switch{
+  display: flex;
+  align-items: center;
+  width: 530px;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 12px;
+  letter-spacing: 1%;
+
+  &__text {
+    margin: 0 0 0 44px;
+  }
+
+  &__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-orange;
+  }
+}

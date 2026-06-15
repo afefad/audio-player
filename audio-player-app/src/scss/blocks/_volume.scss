@@ -1,0 +1,134 @@
+.volume {
+  display: flex;
+  gap: 9px;
+  align-items: flex-end;
+  justify-content: flex-start;
+
+  &__btn {
+    position: relative;
+    background-color: unset;
+    border: unset;
+    margin: 0;
+    padding: 0;
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+
+    &:focus-visible{
+      border: unset;
+      outline: unset;
+    }
+
+    &:focus-visible .volume__icon{
+      color: $color-orange-light;
+    }
+
+    &:hover .volume__icon {
+      color: $color-orange-light;
+    }
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 24px;
+      height: 24px;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    color: $color-orange;
+
+    &--mute {
+      color: $color-grey;
+    }
+  }
+
+  &__input {
+    --progress: 0%;
+
+    width: 100%;
+    height: 12px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+
+    // for Chromiun
+    &::-webkit-slider-runnable-track {
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(
+        to right,
+        $color-orange 0%,
+        $color-orange var(--progress),
+        $color-light-gray var(--progress),
+        $color-light-gray 100%
+      );
+    }
+    &::-webkit-slider-thumb {
+      width: 12px;
+      height: 12px;
+      margin-top: -4px;
+      border: 0;
+      border-radius: 50%;
+      background-color: $color-orange;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    //for Mozilla
+    &::-moz-range-track {
+      height: 4px;
+      border: 0;
+      border-radius: 999px;
+      background-color: $color-light-gray;
+    }
+    &::-moz-range-progress {
+      height: 4px;
+      border: 0;
+      border-radius: 999px;
+      background-color: $color-orange;
+    }
+    &::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border: 0;
+      border-radius: 50%;
+      background-color: $color-orange;
+      appearance: none;
+    }
+
+    &:hover,
+    &:focus-visible {
+      &::-webkit-slider-thumb {
+        background-color: $color-orange-light;
+      }
+      &::-moz-range-thumb {
+        background-color: $color-orange-light;
+      }
+      &::-webkit-slider-runnable-track {
+        background-color: $color-orange-light;
+        background: linear-gradient(
+          to right,
+          $color-orange-light 0%,
+          $color-orange-light var(--progress),
+          $color-light-gray var(--progress),
+          $color-light-gray 100%
+        );
+      }
+      &::-moz-range-progress {
+        background-color: $color-orange-light;
+      }
+    }
+  }
+
+}

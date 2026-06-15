@@ -1,0 +1,45 @@
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  background-color: $color-white;
+  min-width: 650px;
+  margin: 0;
+  padding: 30px;
+  border-radius: 30px;
+  align-items: center;
+  box-shadow: 0px 0px 5px 0px rgba($color-text, 0.1);
+
+  &__title {
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  &__form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 530px;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+
+  &__error {
+    position: absolute;
+    width: 100%;
+    transform: translateX(-50%);
+    left: 50%;
+    bottom: -25px;
+  }
+  
+}

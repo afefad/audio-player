@@ -1,0 +1,22 @@
+.footer {
+  position: sticky;
+  bottom: 0;
+  height: 100px;
+  background-color: $color-white;
+  padding: 5px 0 6px;
+  border-top: 1px solid $color-light-gray;
+  z-index: 200;
+
+  &__content {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    gap: 84px;
+  }
+
+  &__volume {
+    height: 60px;
+  }
+}

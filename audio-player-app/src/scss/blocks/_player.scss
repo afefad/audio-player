@@ -1,0 +1,158 @@
+
+.player {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  height: 60px;
+
+  &__controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__play-btn{
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    background-color: unset;
+    border: unset;
+
+    &:focus-visible{
+      border: unset;
+      outline: unset;
+    }
+
+    &:focus-visible .player__icon{
+      color: $color-orange-light;
+    }
+
+    &:hover .player__icon{
+      color: $color-orange-light
+    }
+  }
+
+  &__icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    color: $color-orange;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 40px;
+      height: 40px;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+    }
+
+    &--pause {
+      color: $color-grey;
+    }
+  }
+
+  &__timeline {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    min-width: 220px
+  }
+
+  &__progress {
+    --progress: 0%;
+
+    width: 100%;
+    height: 12px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+
+    // for Chromiun
+    &::-webkit-slider-runnable-track {
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(
+        to right,
+        $color-orange 0%,
+        $color-orange var(--progress),
+        $color-light-gray var(--progress),
+        $color-light-gray 100%
+      );
+    }
+    &::-webkit-slider-thumb {
+      width: 12px;
+      height: 12px;
+      margin-top: -4px;
+      border: 0;
+      border-radius: 50%;
+      background-color: $color-orange;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    //for Mozilla
+    &::-moz-range-track {
+      height: 4px;
+      border: 0;
+      border-radius: 999px;
+      background-color: $color-light-gray;
+    }
+    &::-moz-range-progress {
+      height: 4px;
+      border: 0;
+      border-radius: 999px;
+      background-color: $color-orange;
+    }
+    &::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border: 0;
+      border-radius: 50%;
+      background-color: $color-orange;
+      appearance: none;
+    }
+
+    &:hover,
+    &:focus-visible {
+      &::-webkit-slider-thumb {
+        background-color: $color-orange-light;
+      }
+      &::-moz-range-thumb {
+        background-color: $color-orange-light;
+      }
+      &::-webkit-slider-runnable-track {
+        background-color: $color-orange-light;
+        background: linear-gradient(
+          to right,
+          $color-orange-light 0%,
+          $color-orange-light var(--progress),
+          $color-light-gray var(--progress),
+          $color-light-gray 100%
+        );
+      }
+      &::-moz-range-progress {
+        background-color: $color-orange-light;
+      }
+    }
+  }
+
+  &__time {
+    width: 24px;
+    font-size: 11px;
+    line-height: 100%;
+    letter-spacing: 1.5%;
+    color: $color-grey;
+  }
+}

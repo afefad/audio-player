@@ -1,0 +1,71 @@
+.track-card {
+  position: relative;
+  display: grid;
+  width: 100%;
+  gap: 0;
+  grid-template-columns: $grid-template-table;
+  align-items: center;
+  min-height: 87px;
+  border-bottom: $border-bottom-gray;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-gray;
+  }
+
+  .artist {
+    min-width: 220px;
+  }
+
+  &__id {
+    padding: 8px;
+    color: $color-grey;
+  }
+
+  &__album {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+  }
+
+  &__calendar {
+    display: grid;
+    grid-template-columns: 1fr 44px;
+    align-items: center;
+    padding: 8px;
+  }
+
+  &__fav-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    
+    &:hover {
+      & .like {
+        color: $color-orange-light;
+      }
+    }
+  }
+
+  &__duration {
+    color: $color-grey;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+  }
+
+  &__more-icon {
+    margin: 0;
+    padding: 0;
+    color: $color-dark-gray;
+    &:hover {
+      color: $color-orange-light;
+    }
+  }
+
+  &:last-child {
+    border: none;
+  }
+}
