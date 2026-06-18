@@ -6,7 +6,6 @@ import type {
 } from "../types/api/apiTypes";
 import type { Track } from "../types/app/trackType";
 import HttpError from "../components/Error";
-import type { el } from "redom";
 
 export default class DummyBackend {
   private readonly baseUrl = "/api";
@@ -62,30 +61,21 @@ export default class DummyBackend {
     }
   }
 
-  public register(data: User): Promise<RegisterResponse> {
+  register(data: User): Promise<RegisterResponse> {
     return this.request<RegisterResponse>(`${this.baseUrl}/register`, {
       method: "POST",
       body: JSON.stringify(data),
     });
   }
 
-  public login(data: User): Promise<LoginResponse> {
+  login(data: User): Promise<LoginResponse> {
     return this.request<LoginResponse>(`${this.baseUrl}/login`, {
       method: "POST",
       body: JSON.stringify(data),
     });
   }
 
-  public getAsyncTracks(token: string): Promise<Track[]> {
-    return this.request<Track[]>(`${this.baseUrl}/tracks`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  }
-
-  public getTracks(token: string): Promise<Track[]> {
+  getTracks(token: string): Promise<Track[]> {
     return Promise.all([
       this.request<Track[]>(`${this.baseUrl}/tracks`, {
         method: "GET",
@@ -109,7 +99,7 @@ export default class DummyBackend {
     });
   }
 
-  public getFavorites(token: string): Promise<Track[]> {
+  getFavorites(token: string): Promise<Track[]> {
     const favorites =  this.request<Track[]>(`${this.baseUrl}/favorites`, {
       method: "GET",
       headers: {
@@ -126,7 +116,7 @@ export default class DummyBackend {
     return favorites
   }
 
-  public addFavorite(token: string, trackId: number): Promise<MessageResponse> {
+  addFavorite(token: string, trackId: number): Promise<MessageResponse> {
 
     const normalizedTrackId = Number(trackId);
 
@@ -145,7 +135,7 @@ export default class DummyBackend {
     return this.request<MessageResponse>(`${this.baseUrl}/favorites`, resp);
   }
 
-  public removeFavorite(
+  removeFavorite(
     token: string,
     trackId: number,
   ): Promise<MessageResponse> {
