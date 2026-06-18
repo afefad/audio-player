@@ -51,4 +51,44 @@
     gap: 30px;
     height: 100%;
   }
+
+  @include vp-1023 {
+    & .container {
+      justify-content: center;
+    }
+
+    &__logo {
+      &::before {
+        display: none;
+      }
+    }
+
+    &__right {
+      justify-content: flex-end
+    }
+
+    & .search__label {
+      display: none;
+    }
+  }
+
+  @include vp-767 {
+    height: 60px;
+    padding: 15px 16px;
+    display: flex;
+    gap: 60px;
+
+    &__logo{
+      width: auto;
+    }
+
+    .container {
+      padding: 0;
+    }
+
+    &__right {
+      margin: 0;
+    }
+  }
+
 }

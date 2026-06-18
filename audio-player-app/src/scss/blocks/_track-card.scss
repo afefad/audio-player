@@ -5,7 +5,8 @@
   gap: 0;
   grid-template-columns: $grid-template-table;
   align-items: center;
-  min-height: 87px;
+  min-height: 88px;
+  height: 88px;
   border-bottom: $border-bottom-gray;
   cursor: pointer;
 
@@ -30,7 +31,7 @@
 
   &__calendar {
     display: grid;
-    grid-template-columns: 1fr 44px;
+    grid-template-columns: 1fr 28px;
     align-items: center;
     padding: 8px;
   }
@@ -39,7 +40,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 0;
     
     &:hover {
       & .like {
@@ -56,6 +57,12 @@
     padding: 8px;
   }
 
+  &__more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &__more-icon {
     margin: 0;
     padding: 0;
@@ -67,5 +74,84 @@
 
   &:last-child {
     border: none;
+  }
+
+  &--playing {
+    background-color: $color-gray;
+    & .artist__img {
+      transform: scale(1.15);
+    }
+  }
+
+  &--playing:hover {
+    background-color: rgba($color-grey, 0.2);
+  }
+
+  @include vp-1023 {
+    background-color: $color-white;
+    display: flex;
+    border: none;
+    padding: 0;
+    min-height: 70px;
+
+    &:hover {
+      background-color: $color-light-gray;
+    }
+
+    &__id,
+    &__album,
+    &__release-date,
+    &__duration-time {
+      display: none;
+    }
+
+    &__fav-btn {
+      padding: 0;
+    }
+
+    &__duration {
+      padding: 0;
+      margin-right: 10px;
+    }
+
+    &__calendar {
+      display: flex;
+      padding: 0;
+      margin-right: 10px;
+    }
+
+    &--playing {
+      background-color: $color-light-gray;
+      & .artist__img {
+        transform: scale(1);
+      }
+    }
+
+    &--playing:hover {
+      background-color: rgba($color-grey, 0.3);
+    }
+  }
+
+  @include vp-767 {
+    .artist {
+      height: 70px;
+      padding: 16px 0 16px 80px;
+      
+      &__title {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 100%;
+        letter-spacing: 0%;
+      }
+
+      &__description {
+        gap: 4px;
+      }
+    }
+
+    &__more-icon {
+      height: 17px;
+      width: 17px;
+    }
   }
 }

@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    z-index: 1;
 
     &::before {
       content: '';
@@ -53,10 +54,99 @@
     color: $color-orange;
   }
 
+  &__icon-mobile {
+    width: 24px;
+    height: 24px;
+    display: none;
+    color: $color-white;
+    transition: color $transition-200;
+  }
+
   &__link-text {
     font-size: 20px;
     line-height: 100%;
     letter-spacing: 0%;
     transition: color $transition-200;
+  }
+
+  @include vp-1023 {
+    padding: 20px 0;
+    display: flex;
+    gap: 19px;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+
+    &__item {
+      margin: 0;
+
+        &::before {
+          display: none;
+        }
+
+        &:hover {
+          & .navigation-list__link-text {
+          color: $color-orange-light;
+        }
+      }
+    }
+
+    &__link {
+      margin: 0;
+      padding: 16px;
+      background-color: $color-white;
+      border-radius: 30px;
+    }
+
+    &__icon {
+      display: none;
+    }
+
+    &__link-text {
+      color: $color-text;
+      font-weight: 400;
+      letter-spacing: 1%;
+    }
+
+    &__item--active {
+      & .navigation-list__icon-mobile {
+        display: block;
+      }
+      & .navigation-list__link{
+        background-color: $color-orange;
+      }
+
+      .navigation-list__link-text,
+      .navigation-list__icon-mobile {
+        color: $color-white;
+      }
+
+      &:hover {
+        & .navigation-list__link-text,
+        & .navigation-list__icon-mobile  {
+          color: $color-text;
+        }
+      }
+    }
+  }
+
+  @include vp-767 {
+    justify-content: space-between;
+
+
+    &__link {
+      gap: 8px;
+    }
+
+    &__link-text {
+      font-size: 14px;
+      line-height: 12px;
+      letter-spacing: 5%;
+    }
+
+    &__item--active {
+      & .navigation-list__link {
+        padding: 10px 16px;
+      }
+    }
   }
 }

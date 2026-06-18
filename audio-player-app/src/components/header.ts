@@ -89,13 +89,12 @@ export default class Header {
       el(
             'a.header__logo',
             { href: '/' },
-            this.logoEl
+            this.logoEl,
           ),
       el(
         'div.container',
         el(
           'div.header__content',
-
           el(
             'div.header__right',
 

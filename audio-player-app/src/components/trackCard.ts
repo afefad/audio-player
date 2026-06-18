@@ -24,46 +24,48 @@ export class TrackCard {
   durationMoreEl: HTMLSpanElement;
   durationMoreIcon: SVGElement;
 
-  private track: Track;
-  private backend: DummyBackend;
-  private token: string | null;
-  private isLikeLoading: boolean;
-  private authManager: AuthManager
+  track: Track;
+  backend: DummyBackend;
+  token: string | null;
+  isLikeLoading: boolean;
+  authManager: AuthManager;
 
   onSelect?: (track: Track) => void;
 
-  constructor(track: Track) {
+  constructor(track: Track, index: number) {
     this.track = track;
-    this.authManager = new AuthManager()
+    this.authManager = new AuthManager();
     this.token = this.authManager.getToken();
     this.backend = new DummyBackend();
     this.isLikeLoading = false;
 
-    this.idEl = el("span.track-card__id", track.id) as HTMLSpanElement;
+    this.idEl = el("span.track-card__id", index + 1) as HTMLSpanElement;
 
-    this.track.isFavorite = this.track.isFavorite ? this.track.isFavorite : false
+    this.track.isFavorite = this.track.isFavorite
+      ? this.track.isFavorite
+      : false;
 
     this.artistEl = new Artist(
       track.title,
       track.artist,
-      track.coverUrl ? track.coverUrl : "images/example.png"
+      track.coverUrl ? track.coverUrl : "images/example.png",
     ) as Artist;
 
     this.albumEl = el(
       "span.track-card__album",
-      track.album ? track.album : "-"
+      track.album ? track.album : "-",
     ) as HTMLSpanElement;
 
     this.calendarReleaseEl = el(
       "span.track-card__release-date",
-      track.releaseDate ? track.releaseDate : "-"
+      track.releaseDate ? track.releaseDate : "-",
     ) as HTMLSpanElement;
 
     this.likeIcon = makeIcon(
       "track-card__fav-icon like",
       16,
       16,
-      "sprite.svg#fav-icon"
+      "sprite.svg#fav-icon",
     ) as SVGElement;
 
     this.likeBtn = el(
@@ -72,36 +74,36 @@ export class TrackCard {
         type: "button",
         "aria-label": "Добавить в избранное",
       },
-      this.likeIcon
+      this.likeIcon,
     ) as HTMLButtonElement;
 
     this.calendarEl = el(
       "span.track-card__calendar",
       this.calendarReleaseEl,
-      this.likeBtn
+      this.likeBtn,
     ) as HTMLDivElement;
 
     this.durationTimeEl = el(
       "span.track-card__duration-time",
-      track.duration ? normalizeDuration(track.duration) : "0:00"
+      track.duration ? normalizeDuration(track.duration) : "0:00",
     ) as HTMLSpanElement;
 
     this.durationMoreIcon = makeIcon(
       "track-card__more-icon",
       23,
       23,
-      "sprite.svg#more-icon"
+      "sprite.svg#more-icon",
     ) as SVGElement;
 
     this.durationMoreEl = el(
       "span.track-card__more",
-      this.durationMoreIcon
+      this.durationMoreIcon,
     ) as HTMLSpanElement;
 
     this.durationEl = el(
       "div.track-card__duration",
       this.durationTimeEl,
-      this.durationMoreEl
+      this.durationMoreEl,
     ) as HTMLDivElement;
 
     this.el = el(
@@ -110,7 +112,7 @@ export class TrackCard {
       this.artistEl,
       this.albumEl,
       this.calendarEl,
-      this.durationEl
+      this.durationEl,
     ) as HTMLDivElement;
 
     this.el.dataset.trackId = String(track.id);
@@ -118,7 +120,10 @@ export class TrackCard {
     this.el.addEventListener("click", (event) => {
       const target = event.target as HTMLElement;
 
-      if (target.closest(".track-card__fav-btn") || target.closest(".track-card__more")) {
+      if (
+        target.closest(".track-card__fav-btn") ||
+        target.closest(".track-card__more")
+      ) {
         return;
       }
 
@@ -136,10 +141,11 @@ export class TrackCard {
   }
 
   private renderLikeState(): void {
-    this.likeIcon.classList.toggle("like--enable", this.track.isFavorite);
+    if (this.track.isFavorite) this.likeIcon.classList.add("like--enable");
+    if (!this.track.isFavorite) this.likeIcon.classList.remove("like--enable");
     this.likeBtn.setAttribute(
       "aria-label",
-      this.track.isFavorite ? "Убрать из избранного" : "Добавить в избранное"
+      this.track.isFavorite ? "Убрать из избранного" : "Добавить в избранное",
     );
     this.likeBtn.disabled = this.isLikeLoading;
   }
@@ -174,12 +180,16 @@ export class TrackCard {
     }
   }
 
-  public setToken(token: string | null): void {
+  setToken(token: string | null): void {
     this.token = token;
   }
 
-  public updateTrack(track: Track): void {
+  updateTrack(track: Track): void {
     this.track = track;
     this.renderLikeState();
+  }
+
+  setPlaying(isPlaying: boolean): void {
+    this.el.classList.toggle("track-card--playing", isPlaying);
   }
 }

@@ -32,11 +32,24 @@ export default class FavoritePage {
       this.mainSection.setSearchQuery(value);
     };
 
-    this.mainSection.onTrackSelect = (track: Track) => {
-      this.player.loadTrack(track);
+    this.mainSection.onTracksLoaded = (tracks: Track[]) => {
+      this.player.setPlaylist(tracks);
     };
 
-    this.el = el("section.favorite-page");
+    this.mainSection.onTrackSelect = (
+      track: Track,
+      tracks: Track[],
+      index: number,
+    ) => {
+      this.player.loadTrack(track, tracks, index);
+      this.player.play();
+    };
+
+    this.player.onTrackChange = (track: Track) => {
+      this.mainSection.setPlayingTrack(Number(track.id));
+    };
+
+    this.el = el("section.main-page");
 
     mount(this.el, this.header);
     mount(this.el, this.mainSection);

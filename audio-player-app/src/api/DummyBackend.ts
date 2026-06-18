@@ -5,6 +5,7 @@ import type {
   MessageResponse,
 } from "../types/api/apiTypes";
 import type { Track } from "../types/app/trackType";
+import HttpError from "../components/Error";
 
 export default class DummyBackend {
   private readonly baseUrl = "/api";
@@ -32,21 +33,26 @@ export default class DummyBackend {
       if (!response.ok) {
 
         let errorMessage = "Request error";
+        let errorCode = 500
+
 
         try {
           const errorData = (await response.json()) as { message?: string };
+          const errorStatus = (await response.status) as number;
           errorMessage = errorData.message ?? errorMessage;
+          errorCode = errorStatus ?? errorCode
         } catch {
           errorMessage = response.statusText || errorMessage;
+          errorCode = response.status || errorCode;
         }
         
-        throw new Error(errorMessage);
+        throw new HttpError(errorMessage, errorCode);
       }
 
       return response.json() as Promise<T>;
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") {
-        throw new Error("Request timeout");
+        throw new HttpError("Request timeout", 504);
       }
 
       throw error;

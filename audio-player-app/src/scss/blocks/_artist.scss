@@ -4,7 +4,7 @@
     gap: 10px;
     margin: 0;
     padding: 14px 8px;
-    min-width: 434px;
+    width: 100%;
 
   &--disabled {
     pointer-events: none;
@@ -71,5 +71,19 @@
     font-size: 12px;
     line-height: 12px;
     letter-spacing: 1%;
+  }
+
+  @include vp-1023 {
+    position: relative;
+    padding: 14px 0 14px 80px;
+
+    &__img-wrap {
+      position: absolute;
+      transform: translateY(-50%);
+      top: 50%;
+      left: 0;
+      height: 70px;
+      width: 70px;
+    }
   }
 }

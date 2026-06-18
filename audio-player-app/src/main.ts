@@ -1,15 +1,9 @@
-import './scss/style.scss'
-import Routes from './app/Routes'
-
-
+import App from "./app";
 
 const appEl = document.querySelector<HTMLDivElement>('#app')
 
 if (appEl) {
-  const router = new Routes(appEl);
-  router.init();
-  window.addEventListener('hashchange', () => {
-    router.init();
-  })
+  const app = new App(appEl)
+  app.init()
 }
 
