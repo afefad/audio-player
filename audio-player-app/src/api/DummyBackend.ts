@@ -6,6 +6,7 @@ import type {
 } from "../types/api/apiTypes";
 import type { Track } from "../types/app/trackType";
 import HttpError from "../components/Error";
+import type { el } from "redom";
 
 export default class DummyBackend {
   private readonly baseUrl = "/api";
@@ -75,7 +76,7 @@ export default class DummyBackend {
     });
   }
 
-  public getTracks(token: string): Promise<Track[]> {
+  public getAsyncTracks(token: string): Promise<Track[]> {
     return this.request<Track[]>(`${this.baseUrl}/tracks`, {
       method: "GET",
       headers: {
@@ -84,13 +85,45 @@ export default class DummyBackend {
     });
   }
 
+  public getTracks(token: string): Promise<Track[]> {
+    return Promise.all([
+      this.request<Track[]>(`${this.baseUrl}/tracks`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      this.request<Track[]>(`${this.baseUrl}/favorites`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    ]).then(([trackList, favorites]) => {
+      const favoriteIds = new Set(favorites.map((el) => el.id));
+
+      return trackList.map((track) => ({
+        ...track,
+        isFavorite: favoriteIds.has(track.id),
+      }));
+    });
+  }
+
   public getFavorites(token: string): Promise<Track[]> {
-    return this.request<Track[]>(`${this.baseUrl}/favorites`, {
+    const favorites =  this.request<Track[]>(`${this.baseUrl}/favorites`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+
+    favorites.then(data => {
+      data.forEach(el => {
+        el.isFavorite = true
+      })
+    })
+
+    return favorites
   }
 
   public addFavorite(token: string, trackId: number): Promise<MessageResponse> {
