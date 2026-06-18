@@ -1,0 +1,41 @@
+/* Global */
+/* ------------------------------------ */
+@import "global/_normalize";
+@import "global/_fonts";
+@import "global/_variables";
+@import "global/_mixins";
+@import "global/_reboot";
+@import "global/_container";
+@import "global/_visually-hidden";
+
+/* Blocks */
+/* ------------------------------------ */
+@import "blocks/_error";
+@import "blocks/_auth-card";
+@import "blocks/_custom-input";
+@import "blocks/_auth-switch";
+@import "blocks/_header";
+@import "blocks/_logo";
+@import "blocks/_profile";
+@import "blocks/_search";
+@import "blocks/_btn";
+@import "blocks/_navigation";
+@import "blocks/_navigation-list";
+@import "blocks/_tracks";
+@import "blocks/_tracks-table";
+@import "blocks/_track-card";
+@import "blocks/_footer";
+@import "blocks/_artist";
+@import "blocks/_like";
+@import "blocks/_player";
+@import "blocks/_player-btn";
+@import "blocks/_volume";
+@import "blocks/_error-block";
+
+
+/* Pages */
+/* ------------------------------------ */
+@import "pages/_main-page";
+@import "pages/_auth-page";
+
+@import "blocks/_loader";

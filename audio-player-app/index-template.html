@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="script.js" defer></script>
+    <title>Document</title>
+  </head>
+
+  <body>
+
+		<header class="header">
+			<div class="container">
+				<div class="header__content">
+					<div class="header__logo">
+						<svg class="navigation__logo" width="184" height="30" aria-hidden="true">
+							<use xlink:href="images/sprite.svg#logo"></use>
+						</svg>
+					</div>
+
+					<div class="header__right">
+						<label class="header__search search__label" for="search">
+							<svg class="search__icon" width="24" height="24" aria-hidden="true">
+								<use xlink:href="images/sprite.svg#search-icon"></use>
+							</svg>
+							<input class="search__input" type="text" name="search" id="search" placeholder="Что будем искать?">
+						</label>
+
+						<div class="header__profile profile">
+							<div class="profile__img-wrap">
+								<img calss="profile__img" src="#" width="42" height="42" alt="User avatar" id="avatar-id">
+							</div>
+							<span class="profile__username" id="username-id">Username</span>
+							<svg class="profile__icon" width="16" height="16" aria-hidden="true" id="chevron-right-id">
+								<use xlink:href="images/sprite.svg#chevron-right-icon"></use>
+							</svg>
+							<button class="profile__btn btn" type="button" id="logout-btn">Выход</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+    <main class="main">
+
+			<aside class="navigation">
+				<div class="container">
+
+					<ul class="navigation__list navigation-list">
+						<li class="navigation-list__item">
+							<a href="#" class="navigation-list__link">
+								<svg class="navigation__logo" width="32" height="32" aria-hidden="true">
+									<use xlink:href="images/sprite.svg#music-notes-icon"></use>
+								</svg>
+								<span class="navigation-list_lint-text">Избранное</span>
+							</a>
+						</li>
+
+						<li class="navigation-list__item">
+							<a href="#" class="navigation-list__link">
+								<svg class="navigation__logo" width="32" height="32" aria-hidden="true">
+									<use xlink:href="images/sprite.svg#music-notes-icon"></use>
+								</svg>
+								<span class="navigation-list_lint-text">Аудиокомпозиции</span>
+							</a>
+						</li>
+					</ul>
+
+				</div>
+			</aside>
+
+
+      <section class="section-class">
+        <div class="container">
+					Content
+				</div>
+      </section>
+
+    </main>
+
+		<footer class="footer">
+			<div class="container">
+				<div class="footer__artist artist">
+					<div class="artist__img-wrap">
+						<img calss="artist__img" src="#" width="60" height="60" alt="...">
+					</div>
+					<div class="artist__description">
+						<div class="artist__title-wrap">
+							<span class="artist__title">#</span>
+							<button type="button">
+								<svg class="artist__fav favorite" width="24" height="24" aria-hidden="true">
+									<use xlink:href="images/sprite.svg#fav-icon"></use>
+								</svg>
+							</button>
+						</div>
+						span.artist__name
+					</div>
+				</div>
+				<div class="footer__player player">
+					Тут внешний вид плеера
+				</div>
+				<div class="footer__volume volume">
+					Тут громкости
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

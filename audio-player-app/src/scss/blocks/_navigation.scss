@@ -1,0 +1,16 @@
+.navigation {
+  margin: 0;
+  padding: 46px 0;
+  min-width: 290px;
+  height: 100%;
+
+  @media (max-width: 1280px) {
+    min-width: 271px;
+  }
+
+  @include vp-1023 {
+    padding: 0;
+    margin: 0;
+    height: auto;
+  }
+}

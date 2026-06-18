@@ -1,0 +1,41 @@
+.btn {
+  margin: 0;
+  padding: 5px 15px;
+  color: $color-text;
+  cursor: pointer;
+  background-color: $color-gray;
+  border: unset;
+  border-radius: 30px;
+
+  &:hover {
+    color: $color-orange;
+  }
+
+  &--logout {
+    width: 85%;
+    background-color: $color-light-gray;
+  }
+
+  &--auth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 53px;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 12px;
+    letter-spacing: 1%;
+    
+    @include vp-767 {
+      font-size: 16px;
+      line-height: 16px;
+      padding: 17px 20px;
+    }
+  }
+
+  &--auth-second {
+    min-width: 240px;
+  }
+
+
+}

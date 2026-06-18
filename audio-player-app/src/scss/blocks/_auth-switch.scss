@@ -1,0 +1,39 @@
+.auth-switch{
+  display: flex;
+  align-items: center;
+  width: 530px;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 12px;
+  letter-spacing: 1%;
+
+  &__text {
+    margin: 0 0 0 44px;
+  }
+
+  &__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-orange;
+  }
+
+  @include vp-767 {
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    gap: 10px;
+    
+    &__text {
+      margin: 0;
+      font-size: 18px;
+      line-height: 18px;
+    }
+
+    &__icon {
+      transform: rotate(90deg);
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

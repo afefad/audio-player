@@ -1,0 +1,54 @@
+.tracks {
+  position: relative;
+  background-color: $color-white;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  &__content {
+    position: relative;
+    margin: 0;
+    padding: 35px 0 35px 16px;
+    height: $main-height;
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+  }
+
+  &__header {
+    font-size: 30px;
+    line-height: 100%;
+    letter-spacing: -2%;
+    padding: 0;
+    margin: 0;
+    
+  }
+
+  &__wrapper {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  @include vp-1023 {
+
+    background-color: unset;
+
+    &__content {
+      margin: 0;
+      padding: 0;
+      height: auto;
+    }
+
+    &__header {
+      @include visually-hidden;
+    }
+
+
+  }
+
+}

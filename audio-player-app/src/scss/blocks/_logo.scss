@@ -1,0 +1,13 @@
+.logo {
+  display: flex;
+
+  &__icon {
+    color: $color-orange;
+  }
+
+  @include vp-767 {
+    &__icon {
+      width: 178px;
+    }
+  }
+}

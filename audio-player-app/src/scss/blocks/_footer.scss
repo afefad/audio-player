@@ -1,0 +1,69 @@
+.footer {
+  height: 100px;
+  background-color: $color-white;
+  padding: 5px 0 6px;
+  border-top: 1px solid $color-light-gray;
+  z-index: 200;
+
+  &__content {
+    margin: 0;
+    padding: 0;
+    display: grid;
+
+    grid-template-columns: minmax(250px, 434px) minmax(434px, 1fr) 97px;
+    align-items: center;
+    gap: 84px;
+
+    @media (max-width: 1280px) {
+      gap: 50px;
+    }
+
+  }
+
+  &__volume {
+    height: 55px;
+  }
+
+  @include vp-1023 {
+    &__content{
+      grid-template-columns: minmax(250px, 434px) minmax(400px, 1fr);
+    }
+    & .footer__volume {
+      display: none;
+    }
+  }
+
+  @include vp-767 {
+    background-color: $color-white;
+    height: 120px;
+    padding: 14px 0;
+
+    .container {
+      padding: 0 16px 0 8px;
+    }
+
+    .artist {
+      padding: 0 0 0 70px;
+      min-height: 60px;
+
+      &__img-wrap{
+        width: 60px;
+        height: 60px;
+        transform: translateY(0);
+        top: 0;
+      }
+
+      &__description {
+        justify-content: flex-start
+      }
+    }
+
+    &__content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+  }
+}

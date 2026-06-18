@@ -1,0 +1,25 @@
+.player-btn {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  background-color: unset;
+  border: unset;
+
+  &:focus-visible{
+    border: unset;
+    outline: unset;
+  }
+
+  &:focus-visible .player__icon{
+    color: $color-orange-light;
+  }
+
+  &:hover .player__icon{
+    color: $color-orange-light
+  }
+
+  
+}
