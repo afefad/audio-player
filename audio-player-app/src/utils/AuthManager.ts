@@ -2,7 +2,6 @@ import DummyBackend from "../api/DummyBackend";
 import LocalStorage from "./LocalStorageManager";
 import type { User } from "../types/api/apiTypes";
 
-
 export default class AuthManager {
   private storage: LocalStorage;
   private api: DummyBackend;
@@ -12,7 +11,7 @@ export default class AuthManager {
     this.api = new DummyBackend();
   }
 
-  public async login(
+  async login(
     username: string,
     password: string,
   ): Promise<boolean | string> {
@@ -29,13 +28,13 @@ export default class AuthManager {
       return true;
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Auth error:', error.message)
+        console.error("Auth error:", error.message);
       }
-      throw error
+      throw error;
     }
   }
 
-  public async register(
+  async register(
     username: string,
     password: string,
   ): Promise<boolean | string> {
@@ -51,38 +50,38 @@ export default class AuthManager {
       return true;
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Auth error:', error.message)
+        console.error("Auth error:", error.message);
       }
-      throw error
+      throw error;
     }
   }
 
-  public logout(): boolean {
+  logout(): boolean {
     try {
       this.storage.removeUsername();
       this.storage.removeToken();
-      return true
+      return true;
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Auth error:', error.message);
+        console.error("Auth error:", error.message);
       }
-      return false
+      return false;
     }
   }
 
-  public getUsername(): string | null {
+  getUsername(): string | null {
     return this.storage.getUsername();
   }
 
-  public getAvatar(): string {
-    return '/images/example.png'
+  getAvatar(): string {
+    return "/images/example.png";
   }
 
-  public getToken(): string | null {
+  getToken(): string | null {
     return this.storage.getToken();
   }
 
-  public isAuth(): boolean {
+  isAuth(): boolean {
     return this.getToken() !== null;
   }
 }

@@ -41,5 +41,37 @@
     left: 50%;
     bottom: -25px;
   }
-  
+
+  @include vp-767 {
+    border: unset;
+    border-radius: unset;
+    box-shadow: unset;
+    min-width: unset;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+
+    &__logo {
+      .logo__icon {
+        aspect-ratio: 153/30;
+        height: 50px;
+      }
+    }
+
+    &__title {
+      width: 320px;
+      font-size: 16px;
+      line-height: 120%;
+      text-align: center;
+    }
+
+    &__form {
+      width: 340px;
+    }
+
+    &__wrapper {
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
 }

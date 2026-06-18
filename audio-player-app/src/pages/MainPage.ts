@@ -12,6 +12,7 @@ export default class MainPage {
   mainSection: MainSection;
   player: FooterPlayer;
   authManager: AuthManager;
+  currentPageType: "main" | "fav"
 
   constructor() {
     this.authManager = new AuthManager();
@@ -28,6 +29,8 @@ export default class MainPage {
     this.mainSection = new MainSection("main");
     this.player = new FooterPlayer();
 
+    this.currentPageType = this.mainSection.currentPageType
+
     this.header.onSearch = (value: string) => {
       this.mainSection.setSearchQuery(value);
     };
@@ -35,6 +38,17 @@ export default class MainPage {
     this.mainSection.onTracksLoaded = (tracks: Track[]) => {
       this.player.setPlaylist(tracks);
     };
+
+    this.mainSection.onFavoriteToggle = (track) => {
+      this.player.updateFavorite(
+        Number(track.id),
+        Boolean(track.isFavorite),
+      )
+      this.mainSection.updateTrackFavorite(
+        Number(track.id),
+        Boolean(track.isFavorite),
+      )
+    }
 
     this.mainSection.onTrackSelect = (
       track: Track,
@@ -54,5 +68,15 @@ export default class MainPage {
     mount(this.el, this.header);
     mount(this.el, this.mainSection);
     mount(this.el, this.player);
+
+    this.player.onFavoriteToggle = (track) => {
+      this.mainSection.updateTrackFavorite(
+        Number(track.id),
+        Boolean(track.isFavorite),
+      )
+    }
   }
+
+
+
 }

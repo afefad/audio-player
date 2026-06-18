@@ -6,4 +6,3 @@ if (appEl) {
   const app = new App(appEl)
   app.init()
 }
-

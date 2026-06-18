@@ -1,9 +1,10 @@
 import { el } from "redom";
 import makeIcon from "../utils/MakeIcon";
-import type { Track } from "../types/app/trackType";
 import DummyBackend from "../api/DummyBackend";
 import AuthManager from "../utils/AuthManager";
 import Router from "../app/Router";
+import Artist from "./artist";
+import type { Track } from "../types/app/trackType";
 
 class FooterPlayer {
   el: HTMLElement;
@@ -14,12 +15,7 @@ class FooterPlayer {
   isFavorite = false;
   isMute = false;
 
-  coverImg: HTMLImageElement;
-  titleEl: HTMLSpanElement;
-  artistBlock: HTMLDivElement;
-  artistEl: HTMLSpanElement;
-  favoriteBtn: HTMLButtonElement;
-  favoriteIcon: SVGElement;
+  artistBlock: Artist;
 
   playerEl: HTMLDivElement;
   playerControlEl: HTMLDivElement;
@@ -61,32 +57,6 @@ class FooterPlayer {
     this.audio = new Audio();
     this.audio.preload = "metadata";
     this.audio.volume = 0.7;
-
-    this.coverImg = el("img.artist__img", {
-      src: "#",
-      width: 60,
-      height: 60,
-      alt: "Track cover",
-    }) as HTMLImageElement;
-
-    this.titleEl = el("span.artist__title", "#") as HTMLSpanElement;
-    this.artistEl = el("span.artist__name", "#") as HTMLSpanElement;
-
-    this.favoriteIcon = makeIcon(
-      "artist__fav.like",
-      16,
-      16,
-      "sprite.svg#fav-icon",
-    );
-
-    this.favoriteBtn = el(
-      "button.artist__fav-btn",
-      {
-        type: "button",
-        "aria-label": "Добавить в избранное",
-      },
-      this.favoriteIcon,
-    ) as HTMLButtonElement;
 
     this.playBtn = el("button.player__play-btn player-btn", {
       type: "button",
@@ -199,15 +169,8 @@ class FooterPlayer {
       this.volumeInput,
     ) as HTMLDivElement;
 
-    this.artistBlock = el(
-      "div.footer__artist.artist artist--disabled",
-      el("div.artist__img-wrap", this.coverImg),
-      el(
-        "div.artist__description",
-        el("div.artist__title-wrap", this.titleEl, this.favoriteBtn),
-        this.artistEl,
-      ),
-    ) as HTMLDivElement;
+    this.artistBlock = new Artist("", "", "", true);
+    this.artistBlock.disabled();
 
     this.el = el(
       "footer.footer",
@@ -289,7 +252,7 @@ class FooterPlayer {
       this.prev();
     });
 
-    this.favoriteBtn.addEventListener("click", () => {
+    this.artistBlock.favoriteBtn.addEventListener("click", () => {
       void this.handleFavoriteClick();
     });
 
@@ -379,9 +342,7 @@ class FooterPlayer {
       const tag = target?.tagName;
 
       const isTyping =
-        tag === "INPUT" ||
-        tag === "TEXTAREA" ||
-        target?.isContentEditable;
+        tag === "INPUT" || tag === "TEXTAREA" || target?.isContentEditable;
 
       if (isTyping) return;
 
@@ -408,29 +369,35 @@ class FooterPlayer {
 
         case "ArrowRight": {
           event.preventDefault();
-          if (!Number.isFinite(this.audio.duration) || this.audio.duration <= 0) return;
+          if (!Number.isFinite(this.audio.duration) || this.audio.duration <= 0)
+            return;
 
           this.audio.currentTime = Math.min(
-            this.audio.currentTime + 5,
+            this.audio.currentTime + 10,
             this.audio.duration,
           );
 
           const progress = (this.audio.currentTime / this.audio.duration) * 100;
           this.progressInput.value = String(progress);
-          this.currentTimeEl.textContent = this.formatTime(this.audio.currentTime);
+          this.currentTimeEl.textContent = this.formatTime(
+            this.audio.currentTime,
+          );
           this.updateRangeProgress(this.progressInput);
           break;
         }
 
         case "ArrowLeft": {
           event.preventDefault();
-          if (!Number.isFinite(this.audio.duration) || this.audio.duration <= 0) return;
+          if (!Number.isFinite(this.audio.duration) || this.audio.duration <= 0)
+            return;
 
-          this.audio.currentTime = Math.max(this.audio.currentTime - 5, 0);
+          this.audio.currentTime = Math.max(this.audio.currentTime - 10, 0);
 
           const progress = (this.audio.currentTime / this.audio.duration) * 100;
           this.progressInput.value = String(progress);
-          this.currentTimeEl.textContent = this.formatTime(this.audio.currentTime);
+          this.currentTimeEl.textContent = this.formatTime(
+            this.audio.currentTime,
+          );
           this.updateRangeProgress(this.progressInput);
           break;
         }
@@ -438,7 +405,10 @@ class FooterPlayer {
         case "ArrowUp": {
           event.preventDefault();
 
-          const newVolume = Math.min(this.audio.muted ? 0.1 : this.audio.volume + 0.1, 1);
+          const newVolume = Math.min(
+            this.audio.muted ? 0.1 : this.audio.volume + 0.1,
+            1,
+          );
           this.audio.muted = false;
           this.audio.volume = Number(newVolume.toFixed(2));
           this.volumeInput.value = String(this.audio.volume);
@@ -515,7 +485,7 @@ class FooterPlayer {
     }
 
     this.isFavoriteLoading = true;
-    this.favoriteBtn.disabled = true;
+    this.artistBlock.favoriteBtn.disabled = true;
 
     const prevIsFavorite = this.currentTrack.isFavorite;
 
@@ -538,7 +508,7 @@ class FooterPlayer {
       console.error("Ошибка при изменении избранного:", error);
     } finally {
       this.isFavoriteLoading = false;
-      this.favoriteBtn.disabled = false;
+      this.artistBlock.favoriteBtn.disabled = false;
     }
   }
 
@@ -595,13 +565,19 @@ class FooterPlayer {
   }
 
   private renderFavoriteState() {
-    this.favoriteBtn.classList.toggle("is-favorite", this.isFavorite);
-    this.favoriteBtn.setAttribute(
+    this.artistBlock.favoriteBtn.classList.toggle(
+      "is-favorite",
+      this.isFavorite,
+    );
+    this.artistBlock.favoriteBtn.setAttribute(
       "aria-label",
       this.isFavorite ? "Убрать из избранного" : "Добавить в избранное",
     );
 
-    this.favoriteIcon.classList.toggle("like--enable", this.isFavorite);
+    this.artistBlock.favoriteIcon.classList.toggle(
+      "like--enable",
+      this.isFavorite,
+    );
   }
 
   private formatTime(time: number) {
@@ -669,13 +645,13 @@ class FooterPlayer {
   }
 
   private applyTrack(track: Track): void {
-    this.titleEl.textContent = track.title;
-    this.artistEl.textContent = track.artist;
-    this.coverImg.src = track.coverUrl ? track.coverUrl : "images/example.png";
-    this.coverImg.alt = `${track.title} cover`;
+    this.artistBlock.titleEl.textContent = track.title;
+    this.artistBlock.artistEl.textContent = track.artist;
+    if (track.coverUrl) this.artistBlock.coverImg.src = track.coverUrl;
+    this.artistBlock.coverImg.alt = `${track.title} cover`;
     this.renderFavoriteState();
 
-    this.artistBlock.classList.remove("artist--disabled");
+    this.artistBlock.enabled();
 
     if (this.audioUrl) {
       URL.revokeObjectURL(this.audioUrl);
@@ -727,7 +703,6 @@ class FooterPlayer {
   }
 
   setPlaylist(tracks: Track[]): void {
-    console.log(tracks);
     this.playlist = tracks;
 
     if (!tracks.length) {
@@ -876,6 +851,15 @@ class FooterPlayer {
     this.isRepeatAll = !this.isRepeatAll;
     this.renderPlaybackModes();
     this.renderRepeatState();
+  }
+
+  updateFavorite(trackId: number, isFavorite: boolean): void {
+    if (!this.currentTrack) return;
+    if (Number(this.currentTrack.id) !== Number(trackId)) return;
+
+    this.currentTrack.isFavorite = isFavorite;
+    this.isFavorite = isFavorite;
+    this.renderFavoriteState();
   }
 }
 

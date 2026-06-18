@@ -1,9 +1,9 @@
-type User = {
+export type User = {
   username: string
   password: string
 }
 
-type RegisterResponse = {
+export type RegisterResponse = {
   message: string
   user: {
     username: string
@@ -11,18 +11,11 @@ type RegisterResponse = {
   }
 }
 
-type LoginResponse = {
+export type LoginResponse = {
   message: string
   token: string
 }
 
-type MessageResponse = {
+export type MessageResponse = {
   message: string
-}
-
-export type {
-  User,
-  RegisterResponse,
-  LoginResponse,
-  MessageResponse
 }

@@ -1,37 +1,89 @@
 .custom-input {
-    position: relative;
-    color: $color-grey;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 53px;
+  position: relative;
+  color: $color-grey;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 53px;
 
-    &__field{
-        padding: 15px;
-        padding-left: 44px;
-        border-radius: 30px;
-        background-color: $color-gray;
-        border: none;
-        width: 100%;
-        height: 100%;
+  &__field {
+    padding: 15px;
+    padding-left: 44px;
+    border-radius: 30px;
+    background-color: $color-gray;
+    border: none;
+    width: 100%;
+    height: 100%;
+    border: 1px transparent solid;
+    transition:
+      border-color $transition-200,
+      background-color $transition-200;
 
-        &::placeholder {
-            color: $color-dark-grey;
-            text-transform: uppercase;
-            font-size: 12px;
-            line-height: 12px;
-            letter-spacing: 9%;
-        }
+    &::placeholder {
+      color: $color-dark-grey;
+      text-transform: uppercase;
+      font-size: 12px;
+      line-height: 12px;
+      letter-spacing: 9%;
     }
 
+    &--error {
+      animation: error 2s linear forwards;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    z-index: 20;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 12px;
+  }
+
+  @include vp-767 {
     &__icon {
-        position: absolute;
-        z-index: 20;
-        transform: translateY(-50%);
-        top: 50%;
-        left: 12px;
+      height: 24px;
+      width: 24px;
     }
+
+    &__field {
+      font-size: 18px;
+      line-height: 18px;
+
+      &::placeholder {
+        font-size: 18px;
+        line-height: 18px;
+      }
+    }
+
+    .custom-input__button {
+      & .btn--auth {
+        font-size: 18px;
+        line-height: 18px;
+        padding: 16px;
+      }
+    }
+  }
+
+  @keyframes error {
+    0% {
+      border-color: transparent;
+      background-color: $color-gray;
+    }
+    16% {
+      border-color: $color-error;
+      background-color: rgba($color-error, 0.1);
+    }
+    82% {
+      border-color: $color-error;
+      background-color: rgba($color-error, 0.1);
+    }
+    100% {
+      border-color: transparent;
+      background-color: $color-gray;
+    }
+  }
 }

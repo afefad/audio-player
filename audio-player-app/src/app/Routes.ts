@@ -1,6 +1,5 @@
 import { mount, setChildren } from 'redom';
 import MainPage from '../pages/MainPage';
-import FavoritePage from '../pages/FavoritePage';
 import AuthPage from '../pages/AuthPage';
 import AuthManager from '../utils/AuthManager';
 
@@ -16,12 +15,12 @@ export default class Routes {
     this.authManager = new AuthManager()
   }
 
-  public init(): void {
+  init(): void {
     window.addEventListener('hashchange', this.renderCurrentPage);
     this.renderCurrentPage();
   }
 
-  public destroy(): void {
+  destroy(): void {
     window.removeEventListener('hashchange', this.renderCurrentPage);
   }
 
@@ -30,10 +29,6 @@ export default class Routes {
 
     if (!this.authManager.getToken()) {
       return '/auth';
-    }
-    
-    if (hash === '/favorites') {
-      return '/favorites';
     }
 
     if (hash === '/auth') {
@@ -55,12 +50,6 @@ export default class Routes {
       setChildren(this.root, []);
       const mainPage = new MainPage()
       mount(this.root, mainPage);
-      return;
-    }
-
-    if (path === '/favorites') {
-      setChildren(this.root, []);
-      mount(this.root, new FavoritePage());
       return;
     }
 

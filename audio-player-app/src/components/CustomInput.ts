@@ -1,12 +1,5 @@
 import { el } from 'redom'
-
-type CustomInputOptions = {
-  type?: string
-  name?: string
-  placeholder: string
-  icon?: SVGElement
-  autocomplete?: string
-}
+import type { CustomInputOptions } from '../types/app/customInputType'
 
 export default class CustomInput {
   el: HTMLLabelElement
@@ -16,14 +9,17 @@ export default class CustomInput {
 
   constructor(options: CustomInputOptions) {
 
-    const { type = 'text', name = '', placeholder, icon, autocomplete = 'off' } = options
+    const { type = 'text', name = '', placeholder, icon, autocomplete = 'off', required} = options
 
     this.inputEl = el('input.custom-input__field', {
       type,
       name,
       placeholder,
       autocomplete,
+      required
     })as HTMLInputElement
+
+
 
     this.iconPlaceholder = el('div.custom-input__icon') as HTMLDivElement
 

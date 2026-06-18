@@ -31,6 +31,7 @@ export class TrackCard {
   authManager: AuthManager;
 
   onSelect?: (track: Track) => void;
+  onFavoriteToggle?: (track: Track) => void;
 
   constructor(track: Track, index: number) {
     this.track = track;
@@ -48,7 +49,7 @@ export class TrackCard {
     this.artistEl = new Artist(
       track.title,
       track.artist,
-      track.coverUrl ? track.coverUrl : "images/example.png",
+      track.coverUrl ? track.coverUrl : "images/cover-example.jpg",
     ) as Artist;
 
     this.albumEl = el(
@@ -162,7 +163,7 @@ export class TrackCard {
 
     try {
       if (this.track.isFavorite) {
-        await this.backend.removeFavorite(this.token, this.track.id);
+        await this.backend.removeFavorite(this.token, Number(this.track.id));
         this.track.isFavorite = false;
       } else {
         await this.backend.addFavorite(this.token, this.track.id);
@@ -170,6 +171,7 @@ export class TrackCard {
       }
 
       this.renderLikeState();
+      this.onFavoriteToggle?.(this.track);
     } catch (error) {
       this.track.isFavorite = prevIsFavorite;
       this.renderLikeState();

@@ -23,6 +23,7 @@ export class TrackTable {
   playingTrackId: number | null = null;
 
   onTrackSelect?: (track: Track, tracks: Track[], index: number) => void;
+  onFavoriteToggle?: (track: Track) => void;
 
   constructor(trackList: Track[]) {
     this.idEl = el(
@@ -91,7 +92,7 @@ export class TrackTable {
     this.updateTracks(trackList);
   }
 
-  public updateTracks(trackList: Track[]): void {
+  updateTracks(trackList: Track[]): void {
     this.trackList = trackList;
 
     this.cards = this.trackList.map((track, index) => {
@@ -102,6 +103,10 @@ export class TrackTable {
       };
 
       card.setPlaying(Number(track.id) === this.playingTrackId);
+
+      card.onFavoriteToggle = (track: Track) => {
+        this.onFavoriteToggle?.(track);
+      };
 
       return card;
     });
@@ -116,12 +121,33 @@ export class TrackTable {
     setChildren(this.tracksBodyEl, [...this.cards, this.sentinelEl]);
   }
 
-  public setPlayingTrack(trackId: number | null): void {
+  setPlayingTrack(trackId: number | null): void {
     this.playingTrackId = trackId;
 
     this.cards.forEach((card) => {
       const cardTrackId = Number(card.el.dataset.trackId);
       card.setPlaying(cardTrackId === trackId);
+    });
+  }
+
+  updateTrackFavorite(trackId: number, isFavorite: boolean): void {
+    const normalizedTrackId = Number(trackId);
+
+    const track = this.trackList.find(
+      (item) => Number(item.id) === normalizedTrackId,
+    );
+    if (track) {
+      track.isFavorite = isFavorite;
+    }
+
+    const card = this.cards.find(
+      (item) => Number(item.track.id) === normalizedTrackId,
+    );
+    if (!card) return;
+
+    card.updateTrack({
+      ...card.track,
+      isFavorite,
     });
   }
 }
