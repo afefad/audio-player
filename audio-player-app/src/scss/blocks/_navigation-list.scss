@@ -43,11 +43,19 @@
   }
 
   &__link {
+    position: relative;
     color: $color-text;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
+
+    &::before {
+      content: '';
+      @include abs-center;
+      width: 300%;
+      height: 140%;
+    }
   }
 
   &__icon {
@@ -95,6 +103,10 @@
       padding: 16px;
       background-color: $color-white;
       border-radius: 30px;
+
+      &::before {
+        display: none;
+      }
     }
 
     &__icon {

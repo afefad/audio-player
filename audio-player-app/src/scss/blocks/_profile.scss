@@ -113,6 +113,23 @@
         letter-spacing: 1%;
         padding: 0;
 
+        &::before {
+            content: '';
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 20px;
+            background-color: $color-light-gray;
+            width: calc(100% + 10px);
+            height: calc(100% + 10px);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity $transition-200,
+                        transform $transition-200,
+                        border-radius $transition-200;
+        }
+
 
         &__img-wrap {
             height: 25px;
@@ -124,8 +141,12 @@
         }
 
         &::after {
+            width: calc(100% + 10px);
             height: 40px;
             opacity: 0;
+            transition: opacity $transition-200,
+                        transform $transition-200,
+                        border-radius $transition-200;
         }
 
         &__btn {
@@ -135,8 +156,12 @@
         }
 
         &--active {
-            border-radius: 20px 20px 0 0;
-            background-color: $color-light-gray;
+            &::before {
+                border-radius: 20px 20px 0 0;
+                opacity: 1;
+                transition: transform $transition-200,
+                            border-radius $transition-200;
+            }
 
             &::after {
                 border-radius: 0 0 20px 20px;
